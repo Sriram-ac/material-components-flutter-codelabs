@@ -13,6 +13,7 @@
 // limitations under the License.
 
 import 'package:flutter/material.dart';
+import 'colors.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -60,8 +61,10 @@ class _LoginPageState extends State<LoginPage> {
               ),
               obscureText: true,
             ),
+            const SizedBox(height: 24.0),
 
             OverflowBar(
+              spacing: 20,
               alignment: MainAxisAlignment.end,
               children: <Widget>[
                 TextButton(
@@ -72,7 +75,10 @@ class _LoginPageState extends State<LoginPage> {
                     Navigator.pop(context);
                   },
                   style: TextButton.styleFrom(
-                    primary: Theme.of(context).colorScheme.secondary,
+                    foregroundColor: kShrineBrown900,
+                    shape: const BeveledRectangleBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(7.0)),
+                    ),
                   ),
                 ),
                 // TODO: Add an elevation to NEXT (103)
@@ -80,8 +86,15 @@ class _LoginPageState extends State<LoginPage> {
                 ElevatedButton(
                   child: const Text('NEXT'),
                   onPressed: () {
+                    _usernameController.clear();
+                    _passwordController.clear();
                     Navigator.pop(context);
                   },
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: kShrineBrown900,
+                    backgroundColor: kShrinePink100,
+                    elevation: 8.0,
+                  ),
                 ),
               ],
             ),

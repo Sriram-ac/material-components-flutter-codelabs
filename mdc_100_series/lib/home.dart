@@ -17,6 +17,8 @@ import 'package:intl/intl.dart';
 
 import 'model/product.dart';
 import 'model/products_repository.dart';
+import 'supplemental/asymmetric_view.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -28,7 +30,6 @@ class HomePage extends StatelessWidget {
     if (products.isEmpty) {
       return const <Card>[];
     }
-
     final ThemeData theme = Theme.of(context);
     final NumberFormat formatter = NumberFormat.simpleCurrency(
         locale: Localizations.localeOf(context).toString());
@@ -36,6 +37,7 @@ class HomePage extends StatelessWidget {
     return products.map((product) {
       return Card(
         clipBehavior: Clip.antiAlias,
+        elevation: 0.0,
         // TODO: Adjust card heights (103)
         child: Column(
           // TODO: Center items on the card (103)
@@ -120,11 +122,9 @@ class HomePage extends StatelessWidget {
         ],
       ),
 
-      body: GridView.count(
-          crossAxisCount: 2,
-          padding: const EdgeInsets.all(16.0),
-          childAspectRatio: 8.0 / 9.0,
-          children: _buildGridCards(context)),
+      body: AsymmetricView(
+        products: ProductsRepository.loadProducts(Category.all),
+      ),
       resizeToAvoidBottomInset:
           false, // TODO: Set resizeToAvoidBottomInset (101)
     );
